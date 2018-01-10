@@ -2,6 +2,7 @@ package com.hencoder.hencoderpracticedraw2.practice;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.support.annotation.Nullable;
@@ -29,6 +30,7 @@ public class Practice15FillPathView extends View {
     }
 
     {
+        setLayerType(LAYER_TYPE_SOFTWARE, null);
         path.moveTo(50, 100);
         path.rLineTo(50, 100);
         path.rLineTo(80, -150);
@@ -44,11 +46,12 @@ public class Practice15FillPathView extends View {
         super.onDraw(canvas);
 
         // 使用 Paint.getFillPath() 获取实际绘制的 Path
-
+        pathPaint.setColor(Color.BLUE);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setStrokeWidth(0);
         // 第一处：获取 Path
         canvas.drawPath(path, paint);
+        paint.getFillPath(path,path1);
 
         canvas.save();
         canvas.translate(500, 0);
@@ -58,12 +61,13 @@ public class Practice15FillPathView extends View {
         canvas.save();
         canvas.translate(0, 200);
         paint.setStyle(Paint.Style.STROKE);
-        // 第二处：设置 Style 为 STROKE 后再获取 Path
+//         第二处：设置 Style 为 STROKE 后再获取 Path
         canvas.drawPath(path, paint);
         canvas.restore();
 
         canvas.save();
         canvas.translate(500, 200);
+        paint.getFillPath(path,path2);
         canvas.drawPath(path2, pathPaint);
         canvas.restore();
 
@@ -76,6 +80,7 @@ public class Practice15FillPathView extends View {
 
         canvas.save();
         canvas.translate(500, 400);
+        paint.getFillPath(path,path3);
         canvas.drawPath(path3, pathPaint);
         canvas.restore();
     }
